@@ -1,0 +1,27 @@
+body {
+    min-height: 100vh;
+}
+
+.sidebar {
+    background-color: #09ef6a;
+    padding: 15px;
+    height: 100vh; /* Full height sidebar */
+}
+
+#centerd-Text{
+    text-align: center;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.sidebar a:hover{
+    background-color: rgba(240, 248, 255, 0.51);
+}
