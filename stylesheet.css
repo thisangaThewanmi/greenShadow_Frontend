@@ -3,39 +3,129 @@ body {
 }
 
 .sidebar {
-    background-color: #198754;
-    padding: 15px;
-    height: 100vh; /* Full height sidebar */
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    /*background-color: #198754;*/ /* Optional: background color for the sidebar */
+    background-color: #ffffff;
+    padding: 20px;
+    border-right: 1px solid #ddd; /* Optional: adds a border to separate the sidebar */
+    overflow-y: auto; /* Makes the sidebar scrollable if the content overflows */
+    width: 200px; /* Adjust this width as needed */
+}
+.main-content {
+    margin-left: 200px; /* Same as the width of the sidebar */
+    padding: 20px;
 }
 
 #centerd-Text{
     text-align: center;
+    color:  #198754;
 }
 
 .sidebar a {
-    color: white;
+    color:  #198754;
+   /* colour:black;*/
     text-decoration: none;
     padding: 10px 15px;
     display: block;
     border-radius: 5px;
     margin-top: 20px;
     text-align: center;
+    box-shadow: rgba(12, 12, 12, 0.37) 0px 5px 15px;
+
 }
 
 .sidebar a:hover{
     background-color: rgba(240, 248, 255, 0.51);
+    color:green;
 }
 
-.tableContainer{
 
-    padding-left: 50px;
-    padding-right: 50px;
+
+
+
+
+
+/* Header styling */
+.header {
+    padding: 0.5rem;
+    /*background-color: #f8f9fa;*/ /* Light background */
+    background-color: #ffffff;
+    /*border-bottom: 1px solid !*#ddd*! #198754; !* Subtle border *!*/
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
+}
+
+/* Profile section styling */
+.account {
+    display: flex;
+    align-items: center;
+    margin-right: 50px;/* Center items vertically */
+}
+
+.profile-text {
+    font-size: 16px;
+    /*font-weight: bold;*/
+    color: #198754; /* Darker text for contrast */
+    margin-right: 0.5rem; /* Space between text and icon */
+}
+
+.profile-icon {
+    font-size: 35px;
+    color: #198754; /* Neutral gray for the icon */
+}
+
+.setting-icon {
+    font-size: 18px;
+    color: #198754; /* Neutral gray for the icon */
+    margin-left: 20px;
+}
+
+.time-text {
+    font-size: 20px;
+    color: #198754;
+
+}
+
+.strip tbody tr:nth-of-type(odd) {
+    background-color: #4aa971; /* Light blue */
+}
+
+.mainContainer{
+    /*height: 100vh;*/
+    width:83vw;
+    box-shadow: rgba(12, 12, 12, 0.37) 0px 5px 15px;
+    border-radius: 20px;
+    color:#198754;
+    margin-right: -35px;
+    margin-bottom:20px;
+}
+
+.formContainer{
+    box-shadow: rgba(12, 12, 12, 0.37) 0px 5px 15px;
+    margin-left: 14px;
+    border-radius: 20px;
+    padding-bottom: 45px;
+    padding-top:45px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width:fit-content;
+    height: fit-content;
+
+}
+
+.subContent{
+    display: flex;
 
 }
 
 .searchRow{
-    margin-top: 30px;
-    margin-bottom: 65px;
+   /* margin-top: 20px;*/
+    margin-bottom: 20px;
+    padding: 20px 10px 20px 10px;
+
 }
 
 
@@ -72,9 +162,33 @@ body {
     max-height: 500px;
 }
 
-.content-row{
+
+
+.form{
     display: flex;
+    justify-content: space-between;
+    align-content: space-between;
 
 }
 
+/*#equipmentForm{
+    margin-left:-30px;
+}*/
+
+
+
+.text-fields{
+    padding: 5px;
+}
+
+
+
+#vehicleForm {
+    background-image: url('assests/download.jpg'); /* Replace 'your-image-path.jpg' with the actual path to your image */
+    background-size: cover; /* Ensures the image covers the entire area */
+    background-position: center; /* Centers the image */
+    padding: 20px; /* Adds some padding around the form */
+    border-radius: 10px; /* Optional: adds rounded corners */
+    color: white; /* Adjust text color for better contrast */
+}
 
