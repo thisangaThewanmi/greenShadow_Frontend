@@ -24,7 +24,7 @@ body {
     color:  #198754;
 }
 
-.sidebar a {
+.sidebar span {
     color:  #198754;
    /* colour:black;*/
     text-decoration: none;
@@ -37,7 +37,7 @@ body {
 
 }
 
-.sidebar a:hover{
+.sidebar span:hover{
     background-color: rgba(240, 248, 255, 0.51);
     color:green;
 }
@@ -56,6 +56,10 @@ body {
     /*border-bottom: 1px solid !*#ddd*! #198754; !* Subtle border *!*/
     display: flex;
     justify-content: flex-end; /* Align items to the right */
+    position: fixed;
+    top:0;
+    right: 0;
+    left:0;
 }
 
 /* Profile section styling */
@@ -93,6 +97,8 @@ body {
     background-color: #4aa971; /* Light blue */
 }
 
+
+
 .mainContainer{
     /*height: 100vh;*/
     width:83vw;
@@ -101,6 +107,8 @@ body {
     color:#198754;
     margin-right: -35px;
     margin-bottom:20px;
+    margin-top: 3rem;
+
 }
 
 .formContainer{
@@ -183,12 +191,12 @@ body {
 
 
 
-#vehicleForm {
-    background-image: url('assests/download.jpg'); /* Replace 'your-image-path.jpg' with the actual path to your image */
-    background-size: cover; /* Ensures the image covers the entire area */
-    background-position: center; /* Centers the image */
-    padding: 20px; /* Adds some padding around the form */
-    border-radius: 10px; /* Optional: adds rounded corners */
-    color: white; /* Adjust text color for better contrast */
-}
+/*#vehicleForm {
+    !*background-image: url('assests/download.jpg');*! !* Replace 'your-image-path.jpg' with the actual path to your image *!
+    background-size: cover; !* Ensures the image covers the entire area *!
+    background-position: center; !* Centers the image *!
+    padding: 20px; !* Adds some padding around the form *!
+    border-radius: 10px; !* Optional: adds rounded corners *!
+    color: white; !* Adjust text color for better contrast *!
+}*/
 
