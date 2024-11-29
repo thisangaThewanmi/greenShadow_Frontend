@@ -58,12 +58,12 @@ $(document).ready(function() {
     /*-------------------------------------------------------*/
 
 
-    /*---------------------  update record   ----------------*/
+    /*---------------------  save record   ----------------*/
     $(document).on("submit", "form", function (e) {
         e.preventDefault();// Prevent the default form submission
 
         // Gather form data
-        const formData = {
+        const staff = {
             staffId: $("#staffId").val(),
             role: $("#role").val(),
             firstName: $("#firstName").val(),
@@ -72,12 +72,42 @@ $(document).ready(function() {
             gender: $("#gender").val(),
             joinedDate: $("#joinedDate").val(),
             dob: $("#dob").val(),
-            address: $("#addressLine1").val(),
+            addressLine1: $("#addressLine1").val(),
             contactNo: $("#contactNo").val(),
             staffEmail: $("#staffEmail").val()
         };
 
-        console.log(formData)
+
+        const jsonStaff = JSON.stringify(staff);
+        console.log("jsonObject:" + jsonStaff);
+
+
+
+        $.ajax({
+            url: "http://localhost:5050/greenShadow/api/v1/staff",
+            type: "POST",  // or POST
+            contentType: "application/json",  // Ensure you're sending JSON
+            dataType: "json",  // Expect a JSON response
+            data: jsonStaff,  // Your JSON data
+            success: function(result, status, xhr) {
+                console.log("Success:", result);
+                console.log("Response Status:", xhr.status);
+
+                // Check the response status and act accordingly
+                if (xhr.status === 201) {
+                    alert("Backend Response: " + JSON.stringify(result));
+                    loadStaffTable();
+                } else {
+                    console.log("Unexpected status code:", xhr.status);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log("Error Status: " + status);
+                console.log("Error Details: " + error);
+                console.log("Response Text: " + xhr.responseText);
+                alert("An error occurred: " + error);
+            }
+        });
 
         // Perform AJAX POST request
     });
