@@ -60,6 +60,7 @@
     <!----Staff Section-->
     <!--=====================================================================================-->
     <section id="staff">
+
         <div class="col-md-9 col-lg-10 main-content">
 
             <div class="container mainContainer">
@@ -95,7 +96,7 @@
 
                 <div class="col">
                     <div class="container fluid-5  ">
-                        <table class="table table-striped strip">
+                        <table class="table table-striped strip ">
                             <thead>
                             <tr>
                                 <th scope="col">StaffId</th>
@@ -115,67 +116,67 @@
 
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>Male</td>
-                                <td>2023-01-01</td>
-                                <td>1990-05-15</td>
-                                <td>123 Street</td>
-                                <td>1234567890</td>
-                                <td>mark@example.com</td>
-                                <td>Admin</td>
-                                <td>
-                                    <button class="btn btn-success btn-sm me-2">Update</button>
-                                </td>
+                            <tbody id="staff-table-body">
+                            <!-- <tr>
+                                 <th scope="row">1</th>
+                                 <td>Mark</td>
+                                 <td>Otto</td>
+                                 <td>@mdo</td>
+                                 <td>Male</td>
+                                 <td>2023-01-01</td>
+                                 <td>1990-05-15</td>
+                                 <td>123 Street</td>
+                                 <td>1234567890</td>
+                                 <td>mark@example.com</td>
+                                 <td>Admin</td>
+                                 <td>
+                                     <button class="btn btn-success btn-sm me-2">Update</button>
+                                 </td>
 
-                                <td>
-                                    <button class="btn btn-danger btn-sm">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>Male</td>
-                                <td>2023-01-01</td>
-                                <td>1990-05-15</td>
-                                <td>456 Avenue</td>
-                                <td>9876543210</td>
-                                <td>jacob@example.com</td>
-                                <td>Editor</td>
-                                <td>
-                                    <button class="btn btn-success btn-sm me-2">Update</button>
-                                </td>
+                                 <td>
+                                     <button class="btn btn-danger btn-sm">Delete</button>
+                                 </td>
+                             </tr>
+                             <tr>
+                                 <th scope="row">2</th>
+                                 <td>Jacob</td>
+                                 <td>Thornton</td>
+                                 <td>@fat</td>
+                                 <td>Male</td>
+                                 <td>2023-01-01</td>
+                                 <td>1990-05-15</td>
+                                 <td>456 Avenue</td>
+                                 <td>9876543210</td>
+                                 <td>jacob@example.com</td>
+                                 <td>Editor</td>
+                                 <td>
+                                     <button class="btn btn-success btn-sm me-2">Update</button>
+                                 </td>
 
-                                <td>
-                                    <button class="btn btn-danger btn-sm">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>Bird</td>
-                                <td>@twitter</td>
-                                <td>Male</td>
-                                <td>2023-01-01</td>
-                                <td>1990-05-15</td>
-                                <td>789 Boulevard</td>
-                                <td>1122334455</td>
-                                <td>larry@example.com</td>
-                                <td>User</td>
-                                <td>
-                                    <button class="btn btn-success btn-sm me-2">Update</button>
-                                </td>
+                                 <td>
+                                     <button class="btn btn-danger btn-sm">Delete</button>
+                                 </td>
+                             </tr>
+                             <tr>
+                                 <th scope="row">3</th>
+                                 <td>Larry</td>
+                                 <td>Bird</td>
+                                 <td>@twitter</td>
+                                 <td>Male</td>
+                                 <td>2023-01-01</td>
+                                 <td>1990-05-15</td>
+                                 <td>789 Boulevard</td>
+                                 <td>1122334455</td>
+                                 <td>larry@example.com</td>
+                                 <td>User</td>
+                                 <td>
+                                     <button class="btn btn-success btn-sm me-2">Update</button>
+                                 </td>
 
-                                <td>
-                                    <button class="btn btn-danger btn-sm">Delete</button>
-                                </td>
-                            </tr>
+                                 <td>
+                                     <button class="btn btn-danger btn-sm">Delete</button>
+                                 </td>
+                             </tr>-->
 
                             </tbody>
                         </table>
@@ -189,7 +190,7 @@
 
             <!--modall-->
 
-            <!-- Scrollable Modal -->
+            <!-- Scrollable Modal - Add-->
             <div class="modal fade" id="scrollableModal" tabindex="-1" aria-labelledby="scrollableModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable modal-lg">
                     <div class="modal-content">
@@ -204,7 +205,8 @@
 
 
 
-                                <form >
+                                <form>
+
                                     <div class="container fluid-5">
 
                                         <div class="row">
@@ -692,6 +694,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="script.js"></script>
+<script src="staffController.js"></script>
 
 
 
