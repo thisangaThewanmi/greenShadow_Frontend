@@ -6,7 +6,7 @@ $(document).ready(function(){
     loadVehicleTable();
 
 
-    /*-------------------------- load vehicle table ----------------------*/
+    /*--------------------------  function to load vehicle table ----------------------*/
     function loadVehicleTable(){
         console.log("loadTable loaded")
 
@@ -34,11 +34,13 @@ $(document).ready(function(){
                         <td class="td-remarks">${vehicle.remarks}</td>
                         <td class="td-staffId">${vehicle.staffId}</td>
                         <td>
-                        <button type="button"  id="update-staff" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-form"> Update</button>
-                        </td>
+               <button type="button" class="update-vehicle" class="btn btn-success">Update</button>
+
+                       </td>
 
                          <td>
-                              <button id="delete-staff" class="btn btn-danger btn-sm">Delete</button>
+                         <button type="button"  class="btn btn-danger  delete-vehicle">Delete</button>
+
                          </td>
                     </tr>`
 
@@ -56,8 +58,7 @@ $(document).ready(function(){
     /*-------------------------------------------------------------------*/
 
 
-    /*--------------------------  get data from a selected row in a table ----------------------*/
-
+    /*--------------------------  get data from a selected row in a table ---------------------*/
     function getDatafromIndex(row) {
         let vehicleId = $(row).find(".td-vehicleId").text().trim();
         let plateNumber = $(row).find(".td-plateNumber").text().trim();
@@ -77,11 +78,10 @@ $(document).ready(function(){
         $('#vehicleStaffId').val(staffIds);
 
     }
-
     /*-----------------------------------------------------------------------------------------*/
 
 
-    /*--------------------------------call function to get data from index-------------------------------*/
+    /*--------------------------------call function to get data from index----------------------*/
     $('#vehicle-table-body').on('click', 'tr', function (){
 
         let index = $(this).index();
@@ -91,7 +91,119 @@ $(document).ready(function(){
 
         getDatafromIndex(this);
     })
-    /*---------------------------------------------------------------------------------------------------*/
+    /*------------------------------------------------------------------------------------------*/
+
+
+    /*---------------------------------function add vehicle-------------------------------------*/
+    function addVehicle(){
+
+        const vehicle= {
+
+            vehicleId : $('#vehicleId').val(),
+            plateId : $('#plateNumber').val(),
+            remarks : $('#remarks').val(),
+            staffId : $('#vehicleStaffId').val(),
+            category : $('#category').val(),
+            fuelType : $('#fuelType').val(),
+            status : $('#vehicleStatus').val()
+        }
+
+        const jsonVehicle = JSON.stringify(vehicle)
+        console.log("jsonObject"+jsonVehicle);
+
+
+        $.ajax({
+            url: "http://localhost:5050/greenShadow/api/v1/vehicle",
+            type: "POST",  // or POST
+            contentType: "application/json",  // Ensure you're sending JSON
+            dataType: "json",  // Expect a JSON response
+            data: jsonVehicle,  // Your JSON data
+
+            success: function(result, status, xhr) {
+                console.log("Success:", result);
+                console.log("Response Status:", xhr.status);
+
+               /* // Check the response status and act accordingly
+                if (xhr.status === 201) {
+                    alert("Backend Response: " + JSON.stringify(result));
+                    loadStaffTable();
+                } else {
+                    console.log("Unexpected status code:", xhr.status);
+                }*/
+                loadVehicleTable();
+                alert("Backend Response: " + JSON.stringify(result));
+            },
+            error: function(xhr, status, error) {
+                console.log("Error Status: " + status);
+                console.log("Error Details: " + error);
+                console.log("Response Text: " + xhr.responseText);
+                alert("An error occurred: " + error);
+            }
+        });
+
+    }
+    /*------------------------------------------------------------------------------------------*/
+
+
+
+    /*--------------------------------call function to add Vehicle-------------------------------*/
+    $('#btn-vehicle-add').on('click', function (){
+
+       addVehicle();
+    })
+    /*--------------------------------------------------------------------------------------------*/
+
+
+
+    /*--------------------------------------  delete a vehicle -------------------------------------*/
+    $(document).on('click', '.delete-vehicle', function() {
+        console.log("clicked delete btn");
+
+
+
+        // Find the vehicle ID from the corresponding cell in the current row
+        let vehicleId = $(this).closest('tr').find(".td-vehicleId").text().trim();
+        console.log("vehicle id got from the table: " + vehicleId);
+
+        $.ajax({
+            url:"http://localhost:5050/greenShadow/api/v1/vehicle/"+vehicleId,
+
+            type: "DELETE",
+            success: function(results) {
+                console.log(results);
+                alert('Vehicle Deleted Successfully...');
+
+                // Remove the row from the table after successful deletion
+                $(this).closest('tr').remove();
+
+                clearTextFields();
+
+                loadVehicleTable();
+            },
+            error: function(error) {
+                console.log(error);
+                alert('Vehicle deletion failed: ' + error);
+            }
+        });
+
+    });
+    /*--------------------------------------------------------------------------------------------*/
+
+
+
+    /*-----------------------------------  clear text fields -----------------------------------*/
+    function clearTextFields() {
+        $('#vehicleId').val('');
+        $('#plateNumber').val('');
+        $('#category').val('');
+        $('#fuelType').val('');
+        $('#vehicleStatus').val('');
+        $('#remarks').val('');
+        $('#vehicleStaffId').val('');
+    }
+    /*--------------------------------------------------------------------------------------------*/
+
+
 
 
 
