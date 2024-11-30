@@ -363,8 +363,8 @@
                                 <label for="fuelType" class="form-label">Fuel Type</label>
                                 <select class="form-select" id="fuelType" name="status">
                                     <option selected disabled>Choose Fuel Type</option>
-                                    <option value="Available">Available</option>
-                                    <option value="In Use">In Use</option>
+                                    <option value="Diesel">Diesel</option>
+                                    <option value="Petrol">Petrol</option>
                                     <option value="Under Maintenance">Under Maintenance</option>
                                 </select>
                             </div>
@@ -386,9 +386,8 @@
                                         <label for="vehicleStatus" class="form-label">Status</label>
                                         <select class="form-select" id="vehicleStatus" name="fieldId">
                                             <option selected disabled>Choose Field ID</option>
-                                            <option value="F1">F1</option>
-                                            <option value="F2">F2</option>
-                                            <option value="F3">F3</option>
+                                            <option value="Active">Active</option>
+                                            <option value="NotActive">Not active</option>
                                         </select>
                                     </div>
 
@@ -398,9 +397,9 @@
                                         <label for="vehicleStaffId" class="form-label">Staff ID</label>
                                         <select class="form-select" id="vehicleStaffId" name="staffId">
                                             <option selected disabled>Choose Staff ID</option>
-                                            <option value="S1">S1</option>
-                                            <option value="S2">S2</option>
-                                            <option value="S3">S3</option>
+                                            <option value="S-003">S-003</option>
+                                            <option value="S-004">S-004</option>
+                                            <option value="S-005">S-005</option>
                                         </select>
                                     </div>
                                 </div>
@@ -443,8 +442,8 @@
 
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
+                                <tbody id="vehicle-table-body">
+                                <!--<tr>
                                     <th scope="row">E-001</th>
                                     <td>CD-0478</td>
                                     <td>Tractor</td>
@@ -493,7 +492,7 @@
                                         <button class="btn btn-danger btn-sm">Delete</button>
                                     </td>
                                 </tr>
-
+-->
                                 </tbody>
                             </table>
                         </div>
@@ -695,6 +694,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="script.js"></script>
 <script src="staffController.js"></script>
+<script src="VehicleController.js"></script>
+
 
 
 
