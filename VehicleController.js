@@ -27,20 +27,18 @@ $(document).ready(function(){
                     var record = `
                     <tr>
                      <td class="td-vehicleId">${vehicle.vehicleId}</td>
-                        <td class="td-plateNumber">${vehicle.plateNumber}</td>
+                        <td class="td-plateNumber">${vehicle.plateId}</td>
                         <td class="td-category">${vehicle.category}</td>
                         <td class="td-fuelType">${vehicle.fuelType}</td>
                         <td class="td-status">${vehicle.status}</td>
                         <td class="td-remarks">${vehicle.remarks}</td>
                         <td class="td-staffId">${vehicle.staffId}</td>
-                        <td>
-               <button type="button" class="update-vehicle" class="btn btn-success">Update</button>
-
-                       </td>
+                      <!--  <td>
+                         <button type="button" class="btn btn-success  update-vehicle">Update</button>
+                        </td>-->
 
                          <td>
                          <button type="button"  class="btn btn-danger  delete-vehicle">Delete</button>
-
                          </td>
                     </tr>`
 
@@ -204,6 +202,55 @@ $(document).ready(function(){
     /*--------------------------------------------------------------------------------------------*/
 
 
+
+    /*--------------------------------- function update vehicles--------------------------------*/
+    function updateVehicle() {
+
+
+        const vehicle = {
+
+            vehicleId: $('#vehicleId').val(),
+            plateId: $('#plateNumber').val(),
+            remarks: $('#remarks').val(),
+            staffId: $('#vehicleStaffId').val(),
+            category: $('#category').val(),
+            fuelType: $('#fuelType').val(),
+            status: $('#vehicleStatus').val()
+        }
+
+        let vehicleId = $('#vehicleId').val();
+        console.log("vehicleid:"+vehicleId)
+
+        const jsonVehicle = JSON.stringify(vehicle)
+        console.log("jsonObject" + jsonVehicle);
+
+
+        $.ajax({
+            url:"http://localhost:5050/greenShadow/api/v1/vehicle/"+vehicleId,
+            type: "PUT",  // or POST
+            contentType: "application/json",  // Ensure you're sending JSON
+            dataType: "json",  // Expect a JSON response
+            data: jsonVehicle,  // Your JSON data
+
+            success: function (results) {
+                console.log(results)
+                alert('Vehicle updated successfully...')
+                loadVehicleTable();
+            },
+            error: function (error) {
+                console.log(error)
+                alert('Vehicle  update failed......'+error)
+            }
+        });
+    }
+    /*--------------------------------------------------------------------------------------------*/
+
+    /*---------------------- calling fuction for updating vehicles--------------------------------*/
+    $('#update-vehicle').on('click', function(){
+        console.log("update btn clicked")
+        updateVehicle();
+    });
+    /*--------------------------------------------------------------------------------------------*/
 
 
 
