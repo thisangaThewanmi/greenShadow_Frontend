@@ -35,11 +35,11 @@ $(document).ready(function() {
                         <td id="td-staffEmail">${staff.staffEmail}</td>
                         <td id="td-role">${staff.role}</td>
                         <td>
-                        <button type="button"  id="update-staff" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-form"> Update</button>
+                            <button type="button" class="btn btn-success update-staff" data-bs-toggle="modal" data-bs-target="#scrollableModal">Update</button>
                         </td>
 
                          <td>
-                              <button id="delete-staff" class="btn btn-danger btn-sm">Delete</button>
+                              <button class="btn btn-danger   delete-staff">Delete</button>
                          </td>
                     </tr>`;
 
@@ -61,6 +61,10 @@ $(document).ready(function() {
     /*---------------------  save record   ----------------*/
     $(document).on("submit", "form", function (e) {
         e.preventDefault();// Prevent the default form submission
+        console.log("clicked modal save")
+
+        $("#btn-save-staff-modal").prop("disabled", true);
+
 
         // Gather form data
         const staff = {
@@ -82,37 +86,104 @@ $(document).ready(function() {
         console.log("jsonObject:" + jsonStaff);
 
 
-
         $.ajax({
             url: "http://localhost:5050/greenShadow/api/v1/staff",
             type: "POST",  // or POST
             contentType: "application/json",  // Ensure you're sending JSON
             dataType: "json",  // Expect a JSON response
             data: jsonStaff,  // Your JSON data
-            success: function(result, status, xhr) {
-                console.log("Success:", result);
-                console.log("Response Status:", xhr.status);
+            success: function(results) {
+                console.log("Response: " + JSON.stringify(results)); // Log the response from the backend
 
-                // Check the response status and act accordingly
-                if (xhr.status === 201) {
-                    alert("Backend Response: " + JSON.stringify(result));
-                    loadStaffTable();
-                } else {
-                    console.log("Unexpected status code:", xhr.status);
+                // Display success message (optional)
+                if (results && results.message) {
+                    alert(results.message); // Show the success message (e.g., "Staff added successfully")
                 }
+
+                // Close the modal after success
+                $("#scrollableModal").modal("hide");
+
+                // Reset the form fields if the form exists
+                const form = $("#staff-form")[0];
+                if (form) {
+                    form.reset();
+                }
+
+                // Reload the staff table or perform other actions
+                loadStaffTable();
+
+                // Re-enable the button
+                $("#btn-save-staff-modal").prop("disabled", false);
             },
             error: function(xhr, status, error) {
+                console.log("HTTP Status: " + xhr.status); // Check the HTTP status code
                 console.log("Error Status: " + status);
-                console.log("Error Details: " + error);
+                console.log("Error Message: " + error);
                 console.log("Response Text: " + xhr.responseText);
-                alert("An error occurred: " + error);
+                alert("An error occurred: " + error); // Display error message
+                $("#btn-save-staff-modal").prop("disabled", false);
             }
         });
 
         // Perform AJAX POST request
     });
 
-        /*-------------------------------------------------------*/
+    /*-------------------------------------------------------*/
+
+
+    /*------------------------------------ deleting a staff ------------------------------*/
+
+    $(document).on('click', '.delete-staff', function() {
+        console.log("clicked delete btn");
+
+
+
+        // Find the vehicle ID from the corresponding cell in the current row
+        let staffId  = $(this).closest('tr').find("#td-staffId").text().trim();
+        console.log("staff id got from the table: " + staffId);
+
+        $.ajax({
+            url:"http://localhost:5050/greenShadow/api/v1/staff/"+staffId,
+            type: "DELETE",
+            success: function(results) {
+                console.log(results);
+                alert('staff Deleted Successfully...');
+
+                // Remove the row from the table after successful deletion
+                $(this).closest('tr').remove();
+                loadStaffTable();
+            },
+            error: function(error) {
+                console.log(error);
+                alert('staff deletion failed: ' + error);
+            }
+        });
+
+    });
+    /*-------------------------------------------------------------------------------------*/
+
+
+
+
+    /* Open Modal for Adding New Staff */
+    $(document).on('click', '#btn-add-staff', function () {
+
+        console.log("Add Staff Button Clicked");
+        $("#scrollableModal").modal("show");
+        $("#btn-save-staff-modal").css({display:'block'});
+        $("#btn-update-staff-modal").css({display:'none'});
+    });
+
+    $(document).on('click', '#update-staff', function () {
+        $("#scrollableModal").modal("show");
+        $("#btn-save-staff-modal").css({display:'none'});
+        $("#btn-update-staff-modal").css({display:'block'});
+
+    });
+
+
+
+
 
 
 
