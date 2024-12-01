@@ -194,4 +194,60 @@ $(document).ready(function (){
 
 
 
+
+
+    /*--------------------------------call function to update Equipment-------------------------------*/
+    $('#btn-equipment-update').on('click', function (){
+
+        updateEquipment();
+    })
+    /*--------------------------------------------------------------------------------------------*/
+
+
+
+    /*---------------------------------function add equipment-------------------------------------*/
+    function updateEquipment(){
+
+        const equipment= {
+
+            equipmentId : $('#equipmentId').val(),
+            type : $('#type').val(),
+            name : $('#name').val(),
+            status : $('#equipmentStatus').val(),
+            fieldId : $('#equipmentFieldId').val(),
+            staffId : $('#equipmentStaffId').val(),
+
+        }
+
+
+        let equipmentId = $('#equipmentId').val();
+        console.log("vehicleid:"+equipmentId)
+
+
+        const jsonEquipment = JSON.stringify(equipment)
+        console.log("jsonObject"+jsonEquipment);
+
+
+        $.ajax({
+            url: "http://localhost:5050/greenShadow/api/v1/equipment/"+equipmentId,
+            type: "PUT",
+            contentType: "application/json",
+            dataType: "json",
+            data: jsonEquipment,
+
+            success: function(result) {
+                alert("Sucessfully  updated an equipment")
+                loadEquipmentTable();
+                alert("Backend Response: " + JSON.stringify(result));
+            },
+            error: function(error) {
+                alert("An error occurred: " + error);
+            }
+        });
+
+    }
+    /*------------------------------------------------------------------------------------------*/
+
+
+
 })
