@@ -86,7 +86,7 @@
                     </div>
 
                     <div class="col col-lg-2">
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#scrollableModal"> + Add a new Staff</button>
+                        <button id="btn-add-staff" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#scrollableModal"> + Add a new Staff</button>
 
                     </div>
 
@@ -289,7 +289,9 @@
 
 
 
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button  id="btn-save-staff-modal" type="submit" class="btn btn-success">Add</button>
+                                        <button id="btn-update-staff-modal" class="btn btn-warning" >Update</button>
+
                                     </div>
                                 </form>
                             </div>
@@ -397,9 +399,9 @@
                                         <label for="vehicleStaffId" class="form-label">Staff ID</label>
                                         <select class="form-select" id="vehicleStaffId" name="staffId">
                                             <option selected disabled>Choose Staff ID</option>
-                                            <option value="S-003">S-003</option>
-                                            <option value="S-004">S-004</option>
                                             <option value="S-005">S-005</option>
+                                            <option value="S-006">S-006</option>
+                                            <option value="S-007">S-007</option>
                                         </select>
                                     </div>
                                 </div>
@@ -432,7 +434,8 @@
                             <table class="table table-striped strip">
                                 <thead>
                                 <tr>
-                                    <th scope="col">VehicleId</th>
+                                    <th  scope="col" style="display: none;" >VehicleId</th>
+
                                     <th scope="col">PlateNumber</th>
                                     <th scope="col">Category</th>
                                     <th scope="col">fuelType</th>
@@ -590,7 +593,6 @@
                             </div>
                             <!-- Submit Button -->
                             <button type="submit" class="btn btn-success" id="btn-equipment-add">Save</button>
-                            <button type="submit" class="btn btn-success" id="btn-equipment-update">Update</button>
 
                         </form>
                     </div>

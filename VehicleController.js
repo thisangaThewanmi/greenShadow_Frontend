@@ -3,6 +3,9 @@ var recordIndex;
 
 $(document).ready(function(){
 
+
+    let selectedVehicleId = null;
+
     loadVehicleTable();
 
 
@@ -17,7 +20,8 @@ $(document).ready(function(){
             dataType:"json",
 
             success: function (results) {
-                console.log(results);
+                console.log("vehicle objs "+results);
+
 
 
                 $('#vehicle-table-body').empty();
@@ -26,8 +30,8 @@ $(document).ready(function(){
 
                     var record = `
                     <tr>
-                     <td class="td-vehicleId">${vehicle.vehicleId}</td>
-                        <td class="td-plateNumber">${vehicle.plateId}</td>
+                     <td class="td-vehicleId"  style="display: none;" >${vehicle.vehicleId}</td>
+                        <td class="td-plateNumber">${vehicle.plateNumber}</td>
                         <td class="td-category">${vehicle.category}</td>
                         <td class="td-fuelType">${vehicle.fuelType}</td>
                         <td class="td-status">${vehicle.status}</td>
@@ -67,6 +71,10 @@ $(document).ready(function(){
         let staffIds = $(row).find(".td-staffId").text().trim();
 
 
+        selectedVehicleId = $(row).find(".td-vehicleId").text().trim();
+        console.log("Selected Vehicle ID: " + selectedVehicleId);
+
+
         $('#vehicleId').val(vehicleId);
         $('#plateNumber').val(plateNumber);
         $('#category').val(category);
@@ -98,7 +106,7 @@ $(document).ready(function(){
         const vehicle= {
 
             vehicleId : $('#vehicleId').val(),
-            plateId : $('#plateNumber').val(),
+            plateNumber : $('#plateNumber').val(),
             remarks : $('#remarks').val(),
             staffId : $('#vehicleStaffId').val(),
             category : $('#category').val(),
@@ -106,6 +114,7 @@ $(document).ready(function(){
             status : $('#vehicleStatus').val()
         }
 
+        console.log("plateID:"+vehicle.plateNumber)
         const jsonVehicle = JSON.stringify(vehicle)
         console.log("jsonObject"+jsonVehicle);
 
@@ -117,25 +126,23 @@ $(document).ready(function(){
             dataType: "json",  // Expect a JSON response
             data: jsonVehicle,  // Your JSON data
 
-            success: function(result, status, xhr) {
-                console.log("Success:", result);
-                console.log("Response Status:", xhr.status);
+            success: function(results) {
+                console.log("Response: " + JSON.stringify(results)); // Log the response from the backend
 
-               /* // Check the response status and act accordingly
-                if (xhr.status === 201) {
-                    alert("Backend Response: " + JSON.stringify(result));
-                    loadStaffTable();
-                } else {
-                    console.log("Unexpected status code:", xhr.status);
-                }*/
+                // Display success message (optional)
+                if (results && results.message) {
+                    alert(results.message); // Show the success message (e.g., "Staff added successfully")
+                }
                 loadVehicleTable();
-                alert("Backend Response: " + JSON.stringify(result));
+
             },
             error: function(xhr, status, error) {
+                console.log("HTTP Status: " + xhr.status); // Check the HTTP status code
                 console.log("Error Status: " + status);
-                console.log("Error Details: " + error);
+                console.log("Error Message: " + error);
                 console.log("Response Text: " + xhr.responseText);
-                alert("An error occurred: " + error);
+                alert("An error occurred: " + error); // Display error message
+                $("#btn-save-staff-modal").prop("disabled", false);
             }
         });
 
@@ -207,10 +214,15 @@ $(document).ready(function(){
     function updateVehicle() {
 
 
+        if (!selectedVehicleId) {
+            alert("No vehicle selected for update!");
+            return;
+        }
+
         const vehicle = {
 
-            vehicleId: $('#vehicleId').val(),
-            plateId: $('#plateNumber').val(),
+            /*vehicleId: $('#vehicleId').val(),*/
+            plateNumber: $('#plateNumber').val(),
             remarks: $('#remarks').val(),
             staffId: $('#vehicleStaffId').val(),
             category: $('#category').val(),
@@ -218,28 +230,39 @@ $(document).ready(function(){
             status: $('#vehicleStatus').val()
         }
 
-        let vehicleId = $('#vehicleId').val();
-        console.log("vehicleid:"+vehicleId)
+
+       /* let vehicleId = $('#vehicleId').val();
+        console.log("vehicleid:"+vehicleId)*/
 
         const jsonVehicle = JSON.stringify(vehicle)
         console.log("jsonObject" + jsonVehicle);
 
 
         $.ajax({
-            url:"http://localhost:5050/greenShadow/api/v1/vehicle/"+vehicleId,
+            url:"http://localhost:5050/greenShadow/api/v1/vehicle/"+selectedVehicleId,
             type: "PUT",  // or POST
             contentType: "application/json",  // Ensure you're sending JSON
             dataType: "json",  // Expect a JSON response
             data: jsonVehicle,  // Your JSON data
 
-            success: function (results) {
-                console.log(results)
-                alert('Vehicle updated successfully...')
+            success: function(results) {
+                /*console.log("Response: " + JSON.stringify(results)); // Log the response from the backend*/
+
+                // Display success message (optional)
+                if (results && results.message) {
+                    console.log(results.message)
+                    alert(results.message); // Show the success message (e.g., "Staff added successfully")
+                }
                 loadVehicleTable();
+
             },
-            error: function (error) {
-                console.log(error)
-                alert('Vehicle  update failed......'+error)
+            error: function(xhr, status, error) {
+                console.log("HTTP Status: " + xhr.status); // Check the HTTP status code
+                console.log("Error Status: " + status);
+                console.log("Error Message: " + error);
+                console.log("Response Text: " + xhr.responseText);
+                alert("An error occurred: " + error); // Display error message
+                $("#btn-save-staff-modal").prop("disabled", false);
             }
         });
     }
@@ -251,7 +274,4 @@ $(document).ready(function(){
         updateVehicle();
     });
     /*--------------------------------------------------------------------------------------------*/
-
-
-
 })
