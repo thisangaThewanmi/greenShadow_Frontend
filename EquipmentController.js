@@ -56,5 +56,39 @@ $(document).ready(function (){
     /*-------------------------------------------------------------------*/
 
 
+    /*--------------------------  get data from a selected row in a table ---------------------*/
+    function getDatafromIndex(row) {
+        let equipmentId = $(row).find(".td-equipmentId").text().trim();
+        let type = $(row).find(".td-type").text().trim();
+        let name = $(row).find(".td-name").text().trim();
+        let status = $(row).find(".td-status").text().trim();
+        let fieldId = $(row).find(".td-fieldId").text().trim();
+        let staffId = $(row).find(".td-staffId").text().trim();
+
+
+        $('#equipmentId').val(equipmentId);
+        $('#type').val(type);
+        $('#name').val(name);
+        $('#equipmentStatus').val(status);
+        $('#equipmentFieldId').val(fieldId);
+        $('#equipmentStaffId').val(staffId);
+
+
+    }
+    /*-----------------------------------------------------------------------------------------*/
+
+
+    /*--------------------------------call function to get data from index----------------------*/
+    $('#equipment-table-body').on('click', 'tr', function (){
+
+        let index = $(this).index();
+        RecordIndex = index;
+
+
+
+        getDatafromIndex(this);
+    })
+    /*------------------------------------------------------------------------------------------*/
+
 
 })
