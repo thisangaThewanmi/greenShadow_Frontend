@@ -6,7 +6,7 @@ $(document).ready(function (){
     loadEquipmentTable();
 
 
-    /*--------------------------  function to load vehicle table ----------------------*/
+    /*--------------------------  function to load equipment table ----------------------*/
     function loadEquipmentTable(){
         console.log("loadTable loaded")
 
@@ -38,7 +38,7 @@ $(document).ready(function (){
                         </td>-->
 
                          <td>
-                         <button type="button"  class="btn btn-danger  delete-vehicle">Delete</button>
+                         <button type="button"  class="btn btn-danger  delete-equipment">Delete</button>
                          </td>
                     </tr>`
 
@@ -89,6 +89,109 @@ $(document).ready(function (){
         getDatafromIndex(this);
     })
     /*------------------------------------------------------------------------------------------*/
+
+
+
+    /*--------------------------------------  delete a equipment -------------------------------------*/
+    $(document).on('click', '.delete-equipment', function() {
+        console.log("clicked delete btn");
+
+
+
+        // Find the vehicle ID from the corresponding cell in the current row
+        let equipmentId  = $(this).closest('tr').find(".td-equipmentId").text().trim();
+        console.log("equipment id got from the table: " + equipmentId);
+
+        $.ajax({
+            url:"http://localhost:5050/greenShadow/api/v1/equipment/"+equipmentId,
+            type: "DELETE",
+            success: function(results) {
+                console.log(results);
+                alert('Equipment Deleted Successfully...');
+
+                // Remove the row from the table after successful deletion
+                $(this).closest('tr').remove();
+
+                clearTextFields();
+
+                loadEquipmentTable();
+            },
+            error: function(error) {
+                console.log(error);
+                alert('Equipment deletion failed: ' + error);
+            }
+        });
+
+    });
+    /*--------------------------------------------------------------------------------------------*/
+
+
+
+    /*-----------------------------------  clear text fields -----------------------------------*/
+    function clearTextFields() {
+        $('#vehicleId').val('');
+        $('#plateNumber').val('');
+        $('#category').val('');
+        $('#fuelType').val('');
+        $('#vehicleStatus').val('');
+        $('#remarks').val('');
+        $('#vehicleStaffId').val('');
+    }
+    /*--------------------------------------------------------------------------------------------*/
+
+
+
+
+    /*---------------------------------function add equipment-------------------------------------*/
+    function addEquipment(){
+
+        const equipment= {
+
+            equipmentId : $('#equipmentId').val(),
+            type : $('#type').val(),
+            name : $('#name').val(),
+            status : $('#equipmentStatus').val(),
+            fieldId : $('#equipmentFieldId').val(),
+            staffId : $('#equipmentStaffId').val(),
+
+        }
+
+        const jsonEquipment = JSON.stringify(equipment)
+        console.log("jsonObject"+jsonEquipment);
+
+
+        $.ajax({
+            url: "http://localhost:5050/greenShadow/api/v1/equipment",
+            type: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            data: jsonEquipment,
+
+            success: function(result, status, xhr) {
+               alert("Sucessfully added an equipment")
+                loadEquipmentTable();
+                alert("Backend Response: " + JSON.stringify(result));
+            },
+            error: function(xhr, status, error) {
+                console.log("Error Status: " + status);
+                console.log("Error Details: " + error);
+                console.log("Response Text: " + xhr.responseText);
+                alert("An error occurred: " + error);
+            }
+        });
+
+    }
+    /*------------------------------------------------------------------------------------------*/
+
+
+
+    /*--------------------------------call function to add Vehicle-------------------------------*/
+    $('#btn-equipment-add').on('click', function (){
+
+        addEquipment();
+    })
+    /*--------------------------------------------------------------------------------------------*/
+
 
 
 })
