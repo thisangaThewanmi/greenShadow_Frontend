@@ -334,21 +334,27 @@
                         <form id="vehicleForm">
 
                             <h5>Vehicle Details</h5>
-
                             <div class="row">
                                 <div class="col form">
 
-                                    <!-- Equipment ID -->
-                                    <div class="mb-3">
-                                        <label for="vehicleId" class="form-label ">Vehicle ID</label>
-                                        <input type="text" class="form-control text-fields " id="vehicleId" name="equipmentId" placeholder="Enter Equipment ID">
-                                    </div>
 
-                                    <!-- Type -->
+                                    <!-- Plate Number -->
                                     <div class="mb-4"> <!-- Changed from mb-3 to mb-4 for more space -->
                                         <label for="plateNumber" class="form-label">Plate Number</label>
                                         <input type="text" class="form-control" id="plateNumber" name="type" placeholder="Enter Plate Number">
                                     </div>
+
+                                    <!--  Vehicle Status-->
+                                    <div class="mb-3">
+                                        <label for="vehicleStatus" class="form-label">Status</label>
+                                        <select class="form-select" id="vehicleStatus" name="fieldId">
+                                            <option selected disabled>Status</option>
+                                            <option value="Active">Active</option>
+                                            <option value="NotActive">Not active</option>
+                                        </select>
+                                    </div>
+
+
                                 </div>
                             </div>
 
@@ -382,19 +388,12 @@
 
 
 
-                            <div class="row">
+                            <!--<div class="row">
                                 <div class="col form">
-                                    <div class="mb-3">
-                                        <label for="vehicleStatus" class="form-label">Status</label>
-                                        <select class="form-select" id="vehicleStatus" name="fieldId">
-                                            <option selected disabled>Choose Field ID</option>
-                                            <option value="Active">Active</option>
-                                            <option value="NotActive">Not active</option>
-                                        </select>
-                                    </div>
 
 
-                                    <!-- Staff ID -->
+
+                                    &lt;!&ndash; Staff ID &ndash;&gt;
                                     <div class="mb-3">
                                         <label for="vehicleStaffId" class="form-label">Staff ID</label>
                                         <select class="form-select" id="vehicleStaffId" name="staffId">
@@ -405,7 +404,33 @@
                                         </select>
                                     </div>
                                 </div>
+                            </div>-->
+
+
+
+                            <div class="row">
+                                <div class="col form">
+                                    <!-- Staff ID -->
+                                    <div class="mb-3">
+                                        <label for="vehicleStaffId" class="form-label">Staff ID</label>
+                                        <select class="form-select" id="vehicleStaffId" name="staffIds[]" multiple>
+                                            <option value="S-005">S-005</option>
+                                            <option value="S-006">S-006</option>
+                                            <option value="S-007">S-007</option>
+                                            <option value="S-008">S-008</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
+
+                            <!-- Label to show selected Staff IDs -->
+                            <div>
+                                <label for="selectedStaffIds">Selected Staff IDs: </label>
+                                <span id="selectedStaffIds"></span>
+                            </div>
+
+
+
                             <!-- Submit Button -->
                             <button type="submit"  id="btn-vehicle-add" class="btn btn-success">Save</button>
                             <button type="button"  id="update-vehicle" class="btn btn-success  ">Update</button>
@@ -435,7 +460,6 @@
                                 <thead>
                                 <tr>
                                     <th  scope="col" style="display: none;" >VehicleId</th>
-
                                     <th scope="col">PlateNumber</th>
                                     <th scope="col">Category</th>
                                     <th scope="col">fuelType</th>
@@ -532,42 +556,39 @@
 
                             <div class="row">
                                 <div class="col form">
-                                    <!-- Equipment ID -->
+
+
+
+                                    <!-- Name -->
                                     <div class="mb-3">
-                                        <label for="equipmentId" class="form-label ">Equipment ID</label>
-                                        <input type="text" class="form-control text-fields " id="equipmentId" name="equipmentId" placeholder="Enter Equipment ID">
+                                        <label for="name" class="form-label">Name</label>
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
                                     </div>
 
-                                    <!-- Type -->
-                                    <div class="mb-4"> <!-- Changed from mb-3 to mb-4 for more space -->
-                                        <label for="type" class="form-label">Type</label>
-                                        <input type="text" class="form-control" id="type" name="type" placeholder="Enter Type">
+
+                                    <!-- Status -->
+                                    <div class="mb-3">
+                                        <label for="equipmentStatus" class="form-label">Status</label>
+                                        <select class="form-select" id="equipmentStatus" name="status">
+                                            <option selected disabled>Choose Status</option>
+                                            <option value="Available">Available</option>
+                                            <option value="In Use">In Use</option>
+                                            <option value="Under Maintenance">Under Maintenance</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
 
 
 
-                            <!-- Name -->
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
-                            </div>
-
-                            <!-- Status -->
-                            <div class="mb-3">
-                                <label for="equipmentStatus" class="form-label">Status</label>
-                                <select class="form-select" id="equipmentStatus" name="status">
-                                    <option selected disabled>Choose Status</option>
-                                    <option value="Available">Available</option>
-                                    <option value="In Use">In Use</option>
-                                    <option value="Under Maintenance">Under Maintenance</option>
-                                </select>
+                            <!-- Type -->
+                            <div class="mb-4"> <!-- Changed from mb-3 to mb-4 for more space -->
+                                <label for="type" class="form-label">Type</label>
+                                <input type="text" class="form-control" id="type" name="type" placeholder="Enter Type">
                             </div>
 
 
-                            <div class="row">
-                                <div class="col form">
+
                                     <div class="mb-3">
                                         <label for="equipmentFieldId" class="form-label">Field ID</label>
                                         <select class="form-select" id="equipmentFieldId" name="fieldId">
@@ -589,10 +610,12 @@
                                             <option value="S-004">S-004</option>
                                         </select>
                                     </div>
-                                </div>
-                            </div>
+
                             <!-- Submit Button -->
                             <button type="submit" class="btn btn-success" id="btn-equipment-add">Save</button>
+
+                            <button type="submit" class="btn btn-success" id="btn-equipment-update">Update</button>
+
 
                         </form>
                     </div>
@@ -618,7 +641,7 @@
                             <table class="table table-striped strip">
                                 <thead>
                                 <tr>
-                                    <th scope="col">EquipmentId</th>
+                                    <th scope="col" style="display: none;">EquipmentId</th>
                                     <th scope="col">Type</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Status</th>
