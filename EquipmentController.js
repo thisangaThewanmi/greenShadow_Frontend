@@ -3,6 +3,8 @@
 
 $(document).ready(function (){
 
+    let selectedEquipmentId=null;
+
     loadEquipmentTable();
 
 
@@ -26,7 +28,7 @@ $(document).ready(function (){
 
                     var record = `
                     <tr>
-                     <td class="td-equipmentId">${equipment.equipmentId}</td>
+                     <td class="td-equipmentId" style="display: none;">${equipment.equipmentId}</td>
                         <td class="td-type">${equipment.type}</td>
                         <td class="td-name">${equipment.name}</td>
                         <td class="td-status">${equipment.status}</td>
@@ -64,6 +66,10 @@ $(document).ready(function (){
         let status = $(row).find(".td-status").text().trim();
         let fieldId = $(row).find(".td-fieldId").text().trim();
         let staffId = $(row).find(".td-staffId").text().trim();
+
+
+        selectedEquipmentId = $(row).find(".td-equipmentId").text().trim();
+        console.log("Selected Vehicle ID: " + equipmentId);
 
 
         $('#equipmentId').val(equipmentId);
@@ -147,7 +153,7 @@ $(document).ready(function (){
 
         const equipment= {
 
-            equipmentId : $('#equipmentId').val(),
+            equipmentId : selectedEquipmentId,
             type : $('#type').val(),
             name : $('#name').val(),
             status : $('#equipmentStatus').val(),
@@ -205,12 +211,18 @@ $(document).ready(function (){
 
 
 
-    /*---------------------------------function add equipment-------------------------------------*/
+    /*---------------------------------function update equipment-------------------------------------*/
     function updateEquipment(){
+        console.log("update athule")
+
+        if (!selectedEquipmentId) {
+            alert("No equipment selected for update!");
+            return;
+        }
 
         const equipment= {
 
-            equipmentId : $('#equipmentId').val(),
+        /*    equipmentId : $('#equipmentId').val(),*/
             type : $('#type').val(),
             name : $('#name').val(),
             status : $('#equipmentStatus').val(),
@@ -219,29 +231,44 @@ $(document).ready(function (){
 
         }
 
+/*
 
         let equipmentId = $('#equipmentId').val();
         console.log("vehicleid:"+equipmentId)
+*/
 
 
         const jsonEquipment = JSON.stringify(equipment)
         console.log("jsonObject"+jsonEquipment);
 
+        console.log("update eka athule tiyena id"+selectedEquipmentId)
+
 
         $.ajax({
-            url: "http://localhost:5050/greenShadow/api/v1/equipment/"+equipmentId,
+            url: "http://localhost:5050/greenShadow/api/v1/equipment/"+selectedEquipmentId,
             type: "PUT",
             contentType: "application/json",
             dataType: "json",
             data: jsonEquipment,
 
-            success: function(result) {
-                alert("Sucessfully  updated an equipment")
+            success: function(results) {
+                /*console.log("Response: " + JSON.stringify(results)); // Log the response from the backend*/
+
+                // Display success message (optional)
+                if (results && results.message) {
+                    console.log(results.message)
+                    alert(results.message);
+                }
                 loadEquipmentTable();
-                alert("Backend Response: " + JSON.stringify(result));
+
             },
-            error: function(error) {
-                alert("An error occurred: " + error);
+            error: function(xhr, status, error) {
+                console.log("HTTP Status: " + xhr.status); // Check the HTTP status code
+                console.log("Error Status: " + status);
+                console.log("Error Message: " + error);
+                console.log("Response Text: " + xhr.responseText);
+                alert("An error occurred: " + error); // Display error message
+
             }
         });
 
