@@ -191,6 +191,7 @@ body {
 
 
 
+
 /*#vehicleForm {
     !*background-image: url('assests/download.jpg');*! !* Replace 'your-image-path.jpg' with the actual path to your image *!
     background-size: cover; !* Ensures the image covers the entire area *!
@@ -200,3 +201,32 @@ body {
     color: white; !* Adjust text color for better contrast *!
 }*/
 
+.formContainer2{
+    width:80%;
+    box-shadow: rgba(12, 12, 12, 0.37) 0px 5px 15px;
+}
+
+
+/*-----------------CROP --------------*/
+
+.sticky-div {
+    width: 53%;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 20px;
+    background: #f8f9fa;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}

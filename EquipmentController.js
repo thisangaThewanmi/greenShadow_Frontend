@@ -18,8 +18,12 @@ $(document).ready(function (){
             type:"GET",
             dataType:"json",
 
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
+
             success: function (results) {
-                console.log(results);
+                console.log("type of result"+typeof(results));
 
 
                 $('#equipment-table-body').empty();

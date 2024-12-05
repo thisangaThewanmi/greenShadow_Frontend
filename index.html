@@ -714,6 +714,135 @@
     </section>
     <!--=====================================================================================-->
 
+
+
+    <!--=====================================================================================-->
+
+    <section id="crop">
+
+        <div class="col-md-9 col-lg-10 main-content">
+
+            <div class="container mainContainer">
+                Dashboard >CropManagement
+            </div>
+
+
+            <div class="container fluid-5 subContent">
+
+                <div class="col">
+
+                    <div class="container fluid-5  formContainer">
+
+                        <form id="cropForm">
+                            <!-- Common Name and Specific Name in the same row -->
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="commonName" class="form-label">Common Name</label>
+                                        <input type="text" id="commonName" name="commonName" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="specificName" class="form-label">Specific Name</label>
+                                        <input type="text" id="specificName" name="specificName" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Category Selection -->
+                            <div class="mb-3">
+                                <label for="category" class="form-label">Category</label>
+                                <select id="crop-category" name="category" class="form-select" required>
+                                    <option value="">Select a category</option>
+                                    <option value="Fruits">Fruits</option>
+                                    <option value="Vegetables">Vegetables</option>
+                                    <option value="Grains">Grains</option>
+                                    <option value="Legumes">Legumes</option>
+                                </select>
+                            </div>
+
+
+                            <!-- Season Selection -->
+                            <div class="mb-3">
+                                <label for="season" class="form-label">Category</label>
+                                <select id="season" name="Seasons" class="form-select" required>
+                                    <option value="">Select a Season</option>
+                                    <option value="Spring">Spring</option>
+                                    <option value="Autumn">Autumn</option>
+                                    <option value="Winter">Winter</option>
+                                    <option value="Summer">Summer</option>
+                                </select>
+                            </div>
+
+
+
+                            <!-- Crop Image Input -->
+                            <div class="mb-3">
+                                <label for="image1" class="form-label">Crop Image</label>
+                                <input type="file" id="image1" name="image1" class="form-control" accept="image/*" required>
+                            </div>
+
+                            <!-- &lt;!&ndash; Field ID Section&ndash;&gt;
+                             <div class="mb-3">
+                                 <label for="fieldId" class="form-label">Field IDs</label>
+                                 <div id="fieldIdContainer">
+                                     <div class="d-flex gap-2 mb-2">
+                                         <select name="fieldIds[]" id="fieldId" class="form-select" required>
+                                             <option value="">Select Field ID</option>
+                                             <option value="F-001">F-001</option>
+                                             &lt;!&ndash;<option value="Field2">Field2</option>
+                                             <option value="Field3">Field3</option>
+                                             <option value="Field4">Field4</option>&ndash;&gt;
+                                         </select>
+                                         <button type="button" id="btn-remove-field" class="btn btn-danger" onclick="removeField(this)">Remove</button>
+                                     </div>
+                                 </div>
+                                 <button type="button" class="btn btn-secondary" id="btn-add-cmb">Add Another Field ID</button>
+                             </div>
+
+     -->
+
+                            <!-- Field Selection -->
+                            <div class="mb-3">
+                                <label for="fields" class="form-label">Category</label>
+                                <select id="fields" name="Field" class="form-select" required>
+                                    <option value="">Select a Field</option>
+                                    <!-- <option value="Spring">Spring</option>
+                                     <option value="Autumn">Autumn</option>
+                                     <option value="Winter">Winter</option>
+                                     <option value="Summer">Summer</option>-->
+                                </select>
+                            </div>
+
+
+
+
+                            <!-- Submit, Update, Delete Buttons -->
+                            <div class="d-flex gap-3">
+                                <button type="button" class="btn btn-success" id="btn-crop-save"> Save Crop</button>
+                                <button id="btn-update-crop" type="button" class="btn btn-primary">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="sticky-div">
+                    <h4>Crop List</h4>
+                    <div id="cardContainer" class="card-grid">
+                        <!-- Cards will be dynamically populated here -->
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+        </div><!--main content-->
+    </section>
+
 </div><!--row-->
 
 
@@ -722,9 +851,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="script.js"></script>
-<script src="staffController.js"></script>
+<script src="StaffController.js"></script>
 <script src="VehicleController.js"></script>
 <script src="EquipmentController.js"></script>
+<script src="CropController.js"></script>
 
 
 

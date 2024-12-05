@@ -1,6 +1,8 @@
 $('#staff').css({display:'block'});
 $('#equipment').css({display:'none'});
 $('#vehicle').css({display:'none'});
+$('#crop').css({display:'none'});
+
 /*$('#staff').css({display:'none'});*/
 
 $('#staff-link').on('click',()=>{
@@ -9,6 +11,8 @@ $('#staff-link').on('click',()=>{
     $('#staff').css({display:'block'});
     $('#vehicle').css({display:'none'});
     $('#equipment').css({display:'none'});
+    $('#crop').css({display:'none'});
+
 
 
 });
@@ -20,6 +24,9 @@ $('#vehicle-link').on('click',()=>{
     $('#vehicle').css({display:'block'});
     $('#staff').css({display:'none'});
     $('#equipment').css({display:'none'});
+    $('#crop').css({display:'none'});
+
+
 });
 
 $('#equipment-link').on('click',()=>{
@@ -28,6 +35,19 @@ $('#equipment-link').on('click',()=>{
     $('#equipment').css({display:'block'});
     $('#staff').css({display:'none'});
     $('#vehicle').css({display:'none'});
+    $('#crop').css({display:'none'});
+
+});
+
+
+$('#crop-link').on('click',()=>{
+    console.log("equipment click")
+
+    $('#equipment').css({display:'none'});
+    $('#staff').css({display:'none'});
+    $('#vehicle').css({display:'none'});
+    $('#crop').css({display:'block'});
+
 
 });
 

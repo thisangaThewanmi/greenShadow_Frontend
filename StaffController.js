@@ -14,6 +14,10 @@ $(document).ready(function() {
             type:"GET",
             dataType:"json",
 
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
+
             success: function (results){
                 console.log(results);
 
@@ -92,6 +96,8 @@ $(document).ready(function() {
             contentType: "application/json",  // Ensure you're sending JSON
             dataType: "json",  // Expect a JSON response
             data: jsonStaff,  // Your JSON data
+
+
             success: function(results) {
                 console.log("Response: " + JSON.stringify(results)); // Log the response from the backend
 
@@ -127,7 +133,6 @@ $(document).ready(function() {
 
         // Perform AJAX POST request
     });
-
     /*-------------------------------------------------------*/
 
 

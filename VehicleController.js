@@ -19,6 +19,10 @@ $(document).ready(function(){
             type:"GET",
             dataType:"json",
 
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
+
             success: function (results) {
                 console.log("vehicle objs "+results);
 
