@@ -230,3 +230,25 @@ body {
     height: auto;
     border-radius: 8px;
 }
+
+
+
+#map {
+    height: 300px;
+    width: 100%;
+}
+
+.field-Data-container{
+    box-shadow: rgba(12, 12, 12, 0.37) 0px 5px 15px;
+    padding-bottom: 45px;
+    padding-top:45px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 20px;
+    margin-left:20px;
+}
+
+
+.sticky-div-field{
+    width:100%
+}

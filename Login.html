@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="SignUp.css">
+    <style>
+        /* Add background image to the left side */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            height: 80%;
+            max-width: 1000px;
+        }
+
+        /* Image section on the left */
+        .image-container {
+            width: 50%;
+            background-image: url(assests/download.jpg); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+            border-radius: 10px 0 0 10px;
+        }
+
+        /* Form container on the right */
+        .form-container {
+            width: 50%;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* White background with slight transparency */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 0 10px 10px 0;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #28a745;
+        }
+
+        .signup-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .signup-btn:hover {
+            background-color: #218838;
+        }
+
+        .signin-link {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .signin-link span {
+            color: #28a745;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sign In Section -->
+<section id="signin-section" class="container">
+    <!-- Image Section -->
+    <div class="image-container"></div>
+
+    <!-- Form Section -->
+    <div class="form-container">
+        <h2>Sign In</h2>
+        <form action="/signin" method="post">
+            <div class="form-group">
+                <label for="signin-email">Email</label>
+                <input type="email" id="signin-email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="signin-password">Password</label>
+                <input type="password" id="signin-password" name="password" placeholder="Enter your password" required>
+            </div>
+            <button type="button" id="btn-signin" class="signup-btn">Sign In</button>
+        </form>
+        <div class="signin-link">
+            <p>Don't have an account? <span onclick="toggleForm('signup')">Sign Up</span></p>
+        </div>
+    </div>
+</section>
+
+<!-- Sign Up Section -->
+<section id="signup-section" class="container hidden">
+    <!-- Image Section -->
+    <div class="image-container"></div>
+
+    <!-- Form Section -->
+    <div class="form-container">
+        <h2>Sign Up</h2>
+        <form action="/signup" method="post">
+            <div class="form-group">
+                <label for="signup-email">Email</label>
+                <input type="email" id="signup-email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" name="password" placeholder="Enter your password" required>
+            </div>
+            <div class="form-group">
+                <label for="signup-role">Role</label>
+                <select id="signup-role" name="role" required>
+                    <option value="">Select your role</option>
+                    <option value="MANAGER">Manager</option>
+                    <option value="SCIENTIST">Scientist</option>
+                    <option value="ADMINISTRATOR">Administrator</option>
+                    <option value="OTHER">Other</option>
+                </select>
+            </div>
+            <button type="button" id="btn-signup" class="signup-btn">Sign Up</button>
+        </form>
+        <div class="signin-link">
+            <p>Already have an account? <span onclick="toggleForm('signin')">Sign In</span></p>
+        </div>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="SignIn.js"></script>
+
+<!--<script>
+    $(document).ready(function() {
+        // Function to toggle between Sign In and Sign Up forms
+        function toggleForm(formType) {
+            if (formType === 'signin') {
+                $('#signin-section').removeClass('hidden');
+                $('#signup-section').addClass('hidden');
+            } else if (formType === 'signup') {
+                $('#signup-section').removeClass('hidden');
+                $('#signin-section').addClass('hidden');
+            }
+        }
+
+        // Default to showing Sign In form on page load
+        toggleForm('signin');
+
+        // When "Sign In" is clicked, navigate to the index form (or homepage)
+        $('#btn-signin').on('click', function() {
+            window.location.href = 'index.html'; // This will navigate to the index page
+        });
+
+        // When "Sign Up" or "Sign In" link is clicked, toggle between forms
+        $('.signin-link span').on('click', function() {
+            const formType = $(this).text().includes('Sign Up') ? 'signup' : 'signin';
+            toggleForm(formType);
+        });
+    });
+</script>-->
+
+</body>
+</html>

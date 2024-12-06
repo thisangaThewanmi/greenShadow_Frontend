@@ -44,9 +44,6 @@ $(document).ready(function() {
 
     function loadAllCropData() {
 
-
-
-
         function fetchData(){
             $.ajax({
                 url: "http://localhost:5050/greenShadow/api/v1/crop", // Replace with your API endpoint

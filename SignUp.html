@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-Up Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .signup-container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        .signup-container h2 {
+            margin-bottom: 1.5rem;
+            color: #333333;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #555555;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #dddddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        .signup-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .signup-btn:hover {
+            background-color: #0056b3;
+        }
+        .signin-link {
+            margin-top: 1rem;
+            display: block;
+            font-size: 0.9rem;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .signin-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="signup-container">
+    <h2>Sign Up</h2>
+    <form action="/signup" method="post">
+        <div class="form-group">
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" name="password" placeholder="Enter your password" required>
+        </div>
+        <div class="form-group">
+            <label for="signup-role">Role</label>
+            <select id="signup-role" name="role" required>
+                <option value="">Select your role</option>
+                <option value="MANAGER">Manager</option>
+                <option value="SCIENTIST">Scientist</option>
+                <option value="ADMINISTRATOR">Administrator</option>
+                <option value="OTHER">Other</option>
+            </select>
+        </div>
+        <button type="button"  id="btn-signup"  class="signup-btn">Sign Up</button>
+        <!--<a href="/signin" class="signin-link">Already have an account? Sign In</a>-->
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="Login.js"></script>
+</body>
+</html>

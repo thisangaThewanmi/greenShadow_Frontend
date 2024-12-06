@@ -1,7 +1,12 @@
-$('#staff').css({display:'block'});
+/*$('#dashboard-nav').css({display:'none'});*/
+$('#staff').css({display:'none'});
 $('#equipment').css({display:'none'});
 $('#vehicle').css({display:'none'});
 $('#crop').css({display:'none'});
+$('#field').css({display:'none'});
+/*$('#signup').css({display:'block'});*/
+
+
 
 /*$('#staff').css({display:'none'});*/
 
@@ -12,7 +17,7 @@ $('#staff-link').on('click',()=>{
     $('#vehicle').css({display:'none'});
     $('#equipment').css({display:'none'});
     $('#crop').css({display:'none'});
-
+    $('#field').css({display:'none'});
 
 
 });
@@ -25,6 +30,7 @@ $('#vehicle-link').on('click',()=>{
     $('#staff').css({display:'none'});
     $('#equipment').css({display:'none'});
     $('#crop').css({display:'none'});
+    $('#field').css({display:'none'});
 
 
 });
@@ -36,6 +42,7 @@ $('#equipment-link').on('click',()=>{
     $('#staff').css({display:'none'});
     $('#vehicle').css({display:'none'});
     $('#crop').css({display:'none'});
+    $('#field').css({display:'none'});
 
 });
 
@@ -47,6 +54,19 @@ $('#crop-link').on('click',()=>{
     $('#staff').css({display:'none'});
     $('#vehicle').css({display:'none'});
     $('#crop').css({display:'block'});
+    $('#field').css({display:'none'});
+
+
+});
+
+$('#field-link').on('click',()=>{
+    console.log("equipment click")
+
+    $('#equipment').css({display:'none'});
+    $('#staff').css({display:'none'});
+    $('#vehicle').css({display:'none'});
+    $('#crop').css({display:'none'});
+    $('#field').css({display:'block'});
 
 
 });
