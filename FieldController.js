@@ -85,6 +85,11 @@ $('.btn-loadCountry').on('click',function (){
                 type: "GET",
                 dataType: "json",
 
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                },
+
+
                 success: function(results) {
                     console.log(results);
 
@@ -270,6 +275,11 @@ $('.btn-loadCountry').on('click',function (){
               data: formData,
               processData: false, // Required for FormData
               contentType: false, // Required for FormData
+
+              headers: {
+                  "Authorization": "Bearer " + localStorage.getItem("token")
+              },
+
               success: function(result, status, xhr) {
                   alert("Sucessfully added the field")
                   // loadEquipmentTable();
@@ -302,6 +312,11 @@ $('.btn-loadCountry').on('click',function (){
                 url: "http://localhost:5050/greenShadow/api/v1/field", // Replace with your API endpoint
                 method: "GET",
                 dataType: "json",
+
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                },
+
                 success: function (data) {
                     console.log("type of result   "+typeof(data))
                     renderCards(data);
@@ -368,6 +383,10 @@ $('.btn-loadCountry').on('click',function (){
         $.ajax({
             url:"http://localhost:5050/greenShadow/api/v1/field/"+id,
             type: "DELETE",
+
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
 
             success: function (response) {
                 alert("delete was sucessful")
