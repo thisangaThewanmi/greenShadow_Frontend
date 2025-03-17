@@ -24,6 +24,16 @@ $(document).ready(function () {
         const email = $('#signin-email').val();
         const password = $('#signin-password').val();
 
+        if (!email || !password) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Missing Credentials',
+                text: 'Please enter both email and password!',
+            });
+            return;
+        }
+
+
         $.ajax({
             url: 'http://localhost:5050/greenShadow/api/v1/auth/signIn',
             type: 'POST',
