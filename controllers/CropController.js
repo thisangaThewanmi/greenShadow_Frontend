@@ -15,6 +15,10 @@ $(document).ready(function() {
             type: "GET",
             dataType: "json",
 
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
+
             success: function (results) {
                 console.log(results);
 
@@ -49,6 +53,11 @@ $(document).ready(function() {
                 url: "http://localhost:5050/greenShadow/api/v1/crop", // Replace with your API endpoint
                 method: "GET",
                 dataType: "json",
+
+
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                },
                 success: function (data) {
                     console.log("type of result   "+typeof(data))
                     renderCards(data);
@@ -149,6 +158,10 @@ $(document).ready(function() {
             data: formData,
             processData: false, // Required for FormData
             contentType: false, // Required for FormData
+
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
             success: function(result, status, xhr) {
                 alert("Sucessfully added the crop")
                 // loadEquipmentTable();
@@ -189,6 +202,10 @@ $(document).ready(function() {
         $.ajax({
             url:"http://localhost:5050/greenShadow/api/v1/crop/"+id,
             type: "DELETE",
+
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
 
             success: function (response) {
                     alert("delete was sucessful")

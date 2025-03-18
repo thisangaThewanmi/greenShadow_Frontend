@@ -6,6 +6,85 @@ $(document).ready(function (){
     let selectedEquipmentId=null;
 
     loadEquipmentTable();
+    loadFieldcmbBox()
+    loadStaffComboBox()
+
+
+    /*------------- load field cmb boxes -------------------*/
+    function loadFieldcmbBox(){
+        console.log("loadFieldCMB");
+
+        $.ajax({
+            url:"http://localhost:5050/greenShadow/api/v1/field",
+            type: "GET",
+            dataType: "json",
+
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
+
+            success: function (results) {
+                console.log(results);
+
+
+                // Clear the existing items in the dropdown or list
+                $('#equipmentFieldId').empty();
+
+                // Loop through the results to get all item IDs
+                results.forEach(function(field) {
+
+
+                    // Assuming each item has a property named 'itemID'
+                    const fieldId= field.fieldId;
+
+                    // Add each itemID to the dropdown or list
+                    $('#equipmentFieldId').append(`<option value="${fieldId}">${fieldId}</option>`);
+                });
+
+
+            }
+        });
+    }
+    /*---------------------------------------------------------*/
+
+
+
+    /*------------- load field cmb boxes -------------------*/
+    function loadStaffComboBox(){
+        console.log("loadstaffCMB");
+
+        $.ajax({
+            url:"http://localhost:5050/greenShadow/api/v1/staff",
+            type: "GET",
+            dataType: "json",
+
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
+
+            success: function (results) {
+                console.log(results);
+
+
+                // Clear the existing items in the dropdown or list
+                $('#equipmentStaffId').empty();
+
+                // Loop through the results to get all item IDs
+                results.forEach(function(staff) {
+
+
+                    // Assuming each item has a property named 'itemID'
+                    const staffId = staff.staffId;
+
+                    // Add each itemID to the dropdown or list
+                    $('#equipmentStaffId').append(`<option value="${staffId}">${staffId}</option>`);
+                });
+
+
+            }
+        });
+    }
+    /*---------------------------------------------------------*/
 
 
     /*--------------------------  function to load equipment table ----------------------*/
@@ -115,6 +194,11 @@ $(document).ready(function (){
         $.ajax({
             url:"http://localhost:5050/greenShadow/api/v1/equipment/"+equipmentId,
             type: "DELETE",
+
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
+
             success: function(results) {
                 console.log(results);
                 alert('Equipment Deleted Successfully...');
@@ -176,6 +260,10 @@ $(document).ready(function (){
             contentType: "application/json",
             dataType: "json",
             data: jsonEquipment,
+
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
 
             success: function(result, status, xhr) {
                alert("Sucessfully added an equipment")
@@ -254,6 +342,10 @@ $(document).ready(function (){
             contentType: "application/json",
             dataType: "json",
             data: jsonEquipment,
+
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
 
             success: function(results) {
                 /*console.log("Response: " + JSON.stringify(results)); // Log the response from the backend*/

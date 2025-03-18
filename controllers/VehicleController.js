@@ -7,6 +7,46 @@ $(document).ready(function(){
     let selectedVehicleId = null;
 
     loadVehicleTable();
+    loadVehicleStaffComboBox()
+
+
+    /*------------- load field cmb boxes -------------------*/
+    function loadVehicleStaffComboBox(){
+        console.log("loadstaffCMB");
+
+        $.ajax({
+            url:"http://localhost:5050/greenShadow/api/v1/staff",
+            type: "GET",
+            dataType: "json",
+
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
+
+            success: function (results) {
+                console.log(results);
+
+
+                // Clear the existing items in the dropdown or list
+                $('#vehicleStaffId').empty();
+
+                // Loop through the results to get all item IDs
+                results.forEach(function(staff) {
+
+
+                    // Assuming each item has a property named 'itemID'
+                    const staffId = staff.staffId;
+
+                    // Add each itemID to the dropdown or list
+                    $('#vehicleStaffId').append(`<option value="${staffId}">${staffId}</option>`);
+                });
+
+
+            }
+        });
+    }
+    /*---------------------------------------------------------*/
+
 
 
     /*--------------------------  function to load vehicle table ----------------------*/
@@ -130,6 +170,10 @@ $(document).ready(function(){
             dataType: "json",  // Expect a JSON response
             data: jsonVehicle,  // Your JSON data
 
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
+
             success: function(results) {
                 console.log("Response: " + JSON.stringify(results)); // Log the response from the backend
 
@@ -178,6 +222,10 @@ $(document).ready(function(){
             url:"http://localhost:5050/greenShadow/api/v1/vehicle/"+vehicleId,
 
             type: "DELETE",
+
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
             success: function(results) {
                 console.log(results);
                 alert('Vehicle Deleted Successfully...');
@@ -248,6 +296,10 @@ $(document).ready(function(){
             contentType: "application/json",  // Ensure you're sending JSON
             dataType: "json",  // Expect a JSON response
             data: jsonVehicle,  // Your JSON data
+
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
 
             success: function(results) {
                 /*console.log("Response: " + JSON.stringify(results)); // Log the response from the backend*/
