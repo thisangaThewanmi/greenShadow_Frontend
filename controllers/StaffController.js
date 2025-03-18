@@ -97,6 +97,9 @@ $(document).ready(function() {
             dataType: "json",  // Expect a JSON response
             data: jsonStaff,  // Your JSON data
 
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
 
             success: function(results) {
                 console.log("Response: " + JSON.stringify(results)); // Log the response from the backend
@@ -150,6 +153,10 @@ $(document).ready(function() {
         $.ajax({
             url:"http://localhost:5050/greenShadow/api/v1/staff/"+staffId,
             type: "DELETE",
+
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
             success: function(results) {
                 console.log(results);
                 alert('staff Deleted Successfully...');
