@@ -24,6 +24,7 @@ $(document).ready(function() {
                 $('#staff-table-body').empty();
 
                 results.forEach( function(staff){
+                    console.log("staff address:"+staff.addressLine1)
 
                     var record = `
                     <tr>
@@ -34,12 +35,12 @@ $(document).ready(function() {
                         <td id="td-gender">${staff.gender}</td>
                         <td id="td-joinedDate">${staff.joinedDate}</td>
                         <td id="td-dob">${staff.dob}</td>
-                        <td id="td-address">${staff.address}</td>
+                        <td id="td-address">${staff.addressLine1}</td>
                         <td id="td-contactNo">${staff.contactNo}</td>
                         <td id="td-staffEmail">${staff.staffEmail}</td>
                         <td id="td-role">${staff.role}</td>
                         <td>
-                            <button type="button" class="btn btn-success update-staff" data-bs-toggle="modal" data-bs-target="#scrollableModal">Update</button>
+                            <button type="button" class="btn btn-success " id="update-staff" data-bs-toggle="modal" data-bs-target="#scrollableModal">Update</button>
                         </td>
 
                          <td>
@@ -181,12 +182,42 @@ $(document).ready(function() {
     $(document).on('click', '#btn-add-staff', function () {
 
         console.log("Add Staff Button Clicked");
+
+        $("#btn-save-staff-modal").show();
+        $("#btn-update-staff-modal").hide();
+
         $("#scrollableModal").modal("show");
-        $("#btn-save-staff-modal").css({display:'block'});
-        $("#btn-update-staff-modal").css({display:'none'});
     });
 
     $(document).on('click', '#update-staff', function () {
+
+        let row = $(this).closest('tr');
+
+        // Extract values from table row cells
+        let staffId = row.find('#td-staffId').text()
+        let firstName = row.find('#td-firstName').text()
+        let lastName = row.find('#td-lastName').text()
+        let designation = row.find('#td-designation').text()
+        let gender = row.find('#td-gender').text()
+        let joinedDate = row.find('#td-joinedDate').text()
+        let dob = row.find('#td-dob').text()
+        let address = row.find('#td-address').text()
+        let contactNo = row.find('#td-contactNo').text()
+        let staffEmail = row.find('#td-staffEmail').text()
+        let role = row.find('#td-role').text()
+
+        $("#staffId").val(staffId);
+        $("#role").val(role);
+        $("#firstName").val(firstName);
+        $("#lastName").val(lastName);
+        $("#designation").val(designation);
+        $("#gender").val(gender);
+        $("#joinedDate").val(joinedDate);
+        $("#dob").val(dob);
+        $("#addressLine1").val(address);
+        $("#contactNo").val(contactNo);
+        $("#staffEmail").val(staffEmail);
+
         $("#scrollableModal").modal("show");
         $("#btn-save-staff-modal").css({display:'none'});
         $("#btn-update-staff-modal").css({display:'block'});
