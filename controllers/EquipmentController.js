@@ -112,9 +112,10 @@ $(document).ready(function (){
                     var record = `
                     <tr>
                      <td class="td-equipmentId" style="display: none;">${equipment.equipmentId}</td>
-                        <td class="td-type">${equipment.type}</td>
+                        
                         <td class="td-name">${equipment.name}</td>
                         <td class="td-status">${equipment.status}</td>
+                        <td class="td-type">${equipment.type}</td>
                         <td class="td-fieldId">${equipment.fieldId}</td>
                         <td class="td-staffId">${equipment.staffId}</td>
                       
@@ -267,7 +268,6 @@ $(document).ready(function (){
 
             success: function(result, status, xhr) {
                alert("Sucessfully added an equipment")
-                loadEquipmentTable();
                 alert("Backend Response: " + JSON.stringify(result));
             },
             error: function(xhr, status, error) {
@@ -277,6 +277,8 @@ $(document).ready(function (){
                 alert("An error occurred: " + error);
             }
         });
+
+        loadEquipmentTable();
 
     }
     /*------------------------------------------------------------------------------------------*/
@@ -367,6 +369,8 @@ $(document).ready(function (){
 
             }
         });
+
+        loadEquipmentTable()
 
     }
     /*------------------------------------------------------------------------------------------*/
