@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    let selectedStaffId=null;
     loadStaffTable()
 
 
@@ -64,9 +65,9 @@ $(document).ready(function() {
 
 
     /*---------------------  save record   ----------------*/
-    $(document).on("submit", "form", function (e) {
-        e.preventDefault();// Prevent the default form submission
-        console.log("clicked modal save")
+    // $(document).on("submit", "form", function (e) {
+
+    function saveStaff() {
 
         $("#btn-save-staff-modal").prop("disabled", true);
 
@@ -102,7 +103,7 @@ $(document).ready(function() {
                 "Authorization": "Bearer " + localStorage.getItem("token")
             },
 
-            success: function(results) {
+            success: function (results) {
                 console.log("Response: " + JSON.stringify(results)); // Log the response from the backend
 
                 // Display success message (optional)
@@ -125,7 +126,7 @@ $(document).ready(function() {
                 // Re-enable the button
                 $("#btn-save-staff-modal").prop("disabled", false);
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.log("HTTP Status: " + xhr.status); // Check the HTTP status code
                 console.log("Error Status: " + status);
                 console.log("Error Message: " + error);
@@ -136,7 +137,8 @@ $(document).ready(function() {
         });
 
         // Perform AJAX POST request
-    });
+        // });
+    }
     /*-------------------------------------------------------*/
 
 
@@ -186,6 +188,9 @@ $(document).ready(function() {
         $("#btn-save-staff-modal").show();
         $("#btn-update-staff-modal").hide();
 
+        $("#staff-form")[0].reset(); // Reset form fields
+        $("#staffId").prop("disabled", true); // Disable staffId field
+
         $("#scrollableModal").modal("show");
     });
 
@@ -225,7 +230,88 @@ $(document).ready(function() {
     });
 
 
+    /*------------------------------------ updating a staff ------------------------------*/
+    function updateStaff() {
 
+        const staff = {
+            staffId: $("#staffId").val(),
+            role: $("#role").val(),
+            firstName: $("#firstName").val(),
+            lastName: $("#lastName").val(),
+            designation: $("#designation").val(),
+            gender: $("#gender").val(),
+            joinedDate: $("#joinedDate").val(),
+            dob: $("#dob").val(),
+            addressLine1: $("#addressLine1").val(),
+            contactNo: $("#contactNo").val(),
+            staffEmail: $("#staffEmail").val()
+        };
+
+
+
+         selectedStaffId = staff.staffId
+
+        const jsonStaff = JSON.stringify(staff)
+        console.log("jsonObject" + jsonStaff);
+
+
+        $.ajax({
+            url:"http://localhost:5050/greenShadow/api/v1/staff/"+selectedStaffId,
+            type: "PUT",  // or POST
+            contentType: "application/json",  // Ensure you're sending JSON
+            dataType: "json",  // Expect a JSON response
+            data: jsonStaff,  // Your JSON data
+
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
+
+            success: function (results) {
+                console.log("Response: " + JSON.stringify(results)); // Log the response from the backend
+
+                // Display success message (optional)
+                if (results && results.message) {
+                    alert(results.message); // Show the success message (e.g., "Staff added successfully")
+                }
+
+                // Close the modal after success
+                $("#scrollableModal").modal("hide");
+
+                // Reset the form fields if the form exists
+                const form = $("#staff-form")[0];
+                if (form) {
+                    form.reset();
+                }
+
+                // Reload the staff table or perform other actions
+                loadStaffTable();
+
+                // Re-enable the button
+                $("#btn-save-staff-modal").prop("disabled", false);
+            },
+            error: function (xhr, status, error) {
+                console.log("HTTP Status: " + xhr.status); // Check the HTTP status code
+                console.log("Error Status: " + status);
+                console.log("Error Message: " + error);
+                console.log("Response Text: " + xhr.responseText);
+                alert("An error occurred: " + error); // Display error message
+                $("#btn-save-staff-modal").prop("disabled", false);
+            }
+        });
+    }
+    /*-------------------------------------------------------------------------------------*/
+
+
+    $("#btn-save-staff-modal").on("click", function (e) {
+        e.preventDefault();
+        saveStaff(); // Call save function
+    });
+
+    // Click event for Update button
+    $("#btn-update-staff-modal").on("click", function (e) {
+        e.preventDefault();
+        updateStaff(); // Call update function
+    });
 
 
 

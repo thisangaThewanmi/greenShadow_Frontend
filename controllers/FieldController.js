@@ -282,7 +282,7 @@ $('.btn-loadCountry').on('click',function (){
 
               success: function(result, status, xhr) {
                   alert("Sucessfully added the field")
-                  // loadEquipmentTable();
+
                   alert("Backend Response: " + JSON.stringify(result));
               },
               error: function(xhr, status, error) {
@@ -307,7 +307,7 @@ $('.btn-loadCountry').on('click',function (){
     /*----------------------------------- load all Field data---------------------------*/
     function loadAllFieldData() {
 
-        function fetchData(){
+        function fetchData() {
             $.ajax({
                 url: "http://localhost:5050/greenShadow/api/v1/field", // Replace with your API endpoint
                 method: "GET",
@@ -318,7 +318,7 @@ $('.btn-loadCountry').on('click',function (){
                 },
 
                 success: function (data) {
-                    console.log("type of result   "+typeof(data))
+                    console.log("type of result   " + typeof (data))
                     renderCards(data);
                 },
                 error: function (xhr, status, error) {
@@ -327,52 +327,118 @@ $('.btn-loadCountry').on('click',function (){
             });
         }
 
+        //
+        //     function  renderCards(data) {
+        //
+        //         console.log("data" + typeof (data));
+        //
+        //         fieldCardContainer.innerHTML = ""; // Clear container
+        //         data.forEach((field) => {
+        //
+        //             console.log("staffIds"+field.staffIds)
+        //
+        //             const imagePrefix = "data:image/jpeg;base64,"; // Adjust to PNG if needed
+        //             const imageSrc = field.image1.startsWith("data:") ? field.image1 : `${imagePrefix}${field.image1}`;
+        //             const imageSrc2 = field.image2.startsWith("data:") ? field.image1 : `${imagePrefix}${field.image1}`;
+        //
+        //             const card = document.createElement('div');
+        //             card.classList.add('card');
+        //             card.setAttribute('data-id', field.fieldId);
+        //             card.innerHTML = `
+        //
+        //     <h5>${field.name}</h5>
+        //
+        //  <div style="display: flex">
+        //      <img src="${imageSrc}" alt="${field.commonName}" style="width: 100%; height: 50%;">
+        //      <br>
+        //      <br>
+        //      <img src="${imageSrc2}" alt="${field.commonName}" style="width: 100%; height: 50%;">
+        //  </div>
+        //
+        //     <div class="labels">
+        //              <span class="label"><strong>Field ID:</strong> ${field.fieldId}</span><br>
+        //             <span class="label"><strong>Size:</strong> ${field.size}</span><br>
+        //             <span class="label"><strong>Location:</strong> ${field.location}</span><br>
+        //             <span class="label"><strong>Staff IDs:</strong> ${field.staffIds}</span><br>
+        //     </div>
+        //     <button class="btn btn-success btn-sm field-add-btn">Add</button>
+        //     <br>
+        //     <button class="btn btn-danger btn-sm field-delete-btn">Delete</button>
+        //   `;
+        //             fieldCardContainer.appendChild(card);
+        //         })
+        //     }
+        //
+        //     fetchData();
+        // }
 
-        function  renderCards(data) {
-
+        function renderCards(data) {
             console.log("data" + typeof (data));
 
             fieldCardContainer.innerHTML = ""; // Clear container
             data.forEach((field) => {
-
-                console.log("staffIds"+field.staffIds)
+                console.log("staffIds" + field.staffIds);
 
                 const imagePrefix = "data:image/jpeg;base64,"; // Adjust to PNG if needed
-                const imageSrc = field.image1.startsWith("data:") ? field.image1 : `${imagePrefix}${field.image1}`;
-                const imageSrc2 = field.image2.startsWith("data:") ? field.image1 : `${imagePrefix}${field.image1}`;
+                const images = [
+                    field.image1.startsWith("data:") ? field.image1 : `${imagePrefix}${field.image1}`,
+                    field.image2.startsWith("data:") ? field.image2 : `${imagePrefix}${field.image2}`
+                ];
+
+                let currentImageIndex = 0; // Start with the first image
 
                 const card = document.createElement('div');
-                card.classList.add('card', 'p-3');
+                card.classList.add('card');
                 card.setAttribute('data-id', field.fieldId);
+
                 card.innerHTML = `
+            <h5>${field.name}</h5>
 
-        <h5>${field.name}</h5>
-     
-         <img src="${imageSrc}" alt="${field.commonName}" style="width: 100%; height: 50%;">
-         <br>
-         <br>
-         <img src="${imageSrc2}" alt="${field.commonName}" style="width: 100%; height: 50%;">
-        
-        <div class="labels">
-         <span class="label  card-fieldId">${field.fieldId}</span><br>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <img id="image-${field.fieldId}" src="${images[currentImageIndex]}" 
+                    alt="${field.commonName}" style="display: block; margin: 0 auto; width: 195px; height: 100px; object-fit: cover; border-radius: 8px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2);">
+                
+                <div style="margin-top: 10px;">
+                    <button class="btn btn-primary btn-sm prev-btn">Prev</button>
+                    <button class="btn btn-primary btn-sm next-btn">Next</button>
+                </div>
+            </div>
+            
+            <div class="labels">
+                <span class="card-fieldId"><strong>Field ID:</strong> ${field.fieldId}</span><br>
+                <span class="card-size"><strong>Size:</strong> ${field.size}</span><br>
+                <span class="card-location"><strong>Location:</strong> ${field.location}</span><br>
+                <span class="card-staffId"><strong>Staff IDs:</strong> ${field.staffIds}</span><br>
+            </div>
+             <br>
+            <button class="btn btn-success btn-sm field-add-btn">Update</button>
+            <br>
+            <button class="btn btn-danger btn-sm field-delete-btn">Delete</button>
+        `;
 
-          <span class="label" >${field.size}</span><br>
-          <span class="label">${field.location}</span><br>
-          <span class="label">${field.staffIds}</span><br>
-        
-        </div>
-        <button class="btn btn-success btn-sm field-add-btn">Add</button>
-        <br>
-        <button class="btn btn-danger btn-sm field-delete-btn">Delete</button>
-      `;
                 fieldCardContainer.appendChild(card);
-            })
+
+                // Add event listeners for sliding images
+                const imageElement = card.querySelector(`#image-${field.fieldId}`);
+                const prevButton = card.querySelector(".prev-btn");
+                const nextButton = card.querySelector(".next-btn");
+
+                prevButton.addEventListener("click", () => {
+                    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                    imageElement.src = images[currentImageIndex];
+                });
+
+                nextButton.addEventListener("click", () => {
+                    currentImageIndex = (currentImageIndex + 1) % images.length;
+                    imageElement.src = images[currentImageIndex];
+                });
+            });
         }
 
         fetchData();
     }
 
-    /*-----------------------------------------------------------------------------------*/
+        /*-----------------------------------------------------------------------------------*/
 
 
 
