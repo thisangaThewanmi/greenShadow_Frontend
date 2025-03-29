@@ -1,4 +1,4 @@
-# **GreenShadow Farm Management System** 🌱🚜  
+# **GreenShadow Crop Management System** 🌱🚜  
 
 GreenShadow is a comprehensive farm management system designed to streamline agricultural operations. It enables farm managers to efficiently oversee fields, crops, staff, vehicles, equipment, and observation logs. With a secure backend and an intuitive frontend, GreenShadow enhances productivity and decision-making.  
 
