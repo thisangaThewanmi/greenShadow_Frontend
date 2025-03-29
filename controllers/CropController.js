@@ -3,7 +3,7 @@ $(document).ready(function() {
     loadFields();
     loadAllCropData();
 
-    const cardContainer = document.getElementById('cardContainer');
+    const cardContainer = document.getElementById('crop-cardContainer');
 
 
     /*-------------------load combo boxes---------------------------*/
@@ -85,16 +85,22 @@ $(document).ready(function() {
                 card.innerHTML = `
 
         <h5>${crop.commonName}</h5>
-         <img src="${imageSrc}" alt="${crop.commonName}" style="width: 100%; height: auto;">
-        <div class="labels">
-         <span class="label  card-cropId">${crop.cropId}</span><br>
+        <img src="${imageSrc}" alt="${crop.commonName}" 
+     style="display: block; margin: 0 auto; 
+            width: 195px; height: 100px; object-fit: cover; 
+            border-radius: 8px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2);">
+       <div class="labels">
+         <span class="label  card-cropId"><strong>Crop Id:</strong>${crop.cropId}</span><br>
 
-          <span class="label" >${crop.specificName}</span><br>
-          <span class="label">${crop.category}</span><br>
-          <span class="label">${crop.season}</span><br>
-          <span class="label">${crop.fieldId}</span><br>
-        </div>
-        <button class="btn btn-success btn-sm add-btn">Add</button>
+           <span class="label"><strong>Specific Name:</strong> ${crop.specificName}</span><br>
+            <span class="label"><strong>Category:</strong> ${crop.category}</span><br>
+            <span class="label"><strong>Season:</strong> ${crop.season}</span><br>
+            <span class="label"><strong>Field ID:</strong> ${crop.fieldId}</span><br>
+                </div>
+                
+                 <br>
+        <button class="btn btn-success btn-sm add-btn">Update</button>
+        <br>
         <button class="btn btn-danger btn-sm delete-btn">Delete</button>
       `;
                 cardContainer.appendChild(card);
@@ -174,6 +180,8 @@ $(document).ready(function() {
                 alert("An error occurred: " + error);
             }
         });
+
+        loadAllCropData()
     }
 
     /*---------------------------------------------------------------*/
@@ -217,6 +225,8 @@ $(document).ready(function() {
                 alert('An error occurred while deleting the item');
             }
         });
+
+        loadAllCropData();
     };
 
 // Event delegation for delete buttons
@@ -234,6 +244,8 @@ $(document).ready(function() {
 
 
         deleteCrop(id)
+
+
     }
 
 
